@@ -1,16 +1,12 @@
 import React from 'react';
 
 class SearchBar extends React.Component {
-  state = { searchTerm: "" };
+  state = { searchTerm: this.props.defaultQuery };
 
   onFormSubmit = (ev) => {
     ev.preventDefault();
 
     this.props.onFormSubmit(this.state.searchTerm);
-  }
-
-  submitQuery(ev) {
-    this.setState({ searchTerm: ev.target.value });
   }
 
   render() {
@@ -21,7 +17,8 @@ class SearchBar extends React.Component {
           <input 
             type="text" 
             value={this.state.searchTerm} 
-            onChange={this.submitQuery.bind(this)} />
+            onChange={(ev) => this.setState({ searchTerm: ev.target.value })} 
+          />
           <i aria-hidden="true" className="search circular link icon"></i>
         </form>
       </div>
