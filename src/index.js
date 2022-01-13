@@ -1,15 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { SearchBar, VideoList } from "./components";
+import youtubeAPI from './apis/youtube';
 import './index.css';
 
 class App extends React.Component {
+  state = { videos: [] };
+  
+  onTermSubmit = query => {
+    youtubeAPI.get("/search", {
+      params: {
+        q: query,
+      }
+    }).then(response => this.setState({ videos: response.data.items }));
+  };
+
+  onVideoResults = () => {
+    return this.state.videos.length > 0;
+  };
+
   render() {
     return (
       <div>
-        <SearchBar />
+        <SearchBar onFormSubmit={this.onTermSubmit}/>
         <hr/>
-        <VideoList />
+        {this.onVideoResults() && <VideoList videos={this.state.videos}/>}
       </div>
     );
   }
