@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { SearchBar, VideoList } from "./components";
+import { SearchBar, VideoList, MainVideo } from "./components";
 import youtubeAPI from './apis/youtube';
 import './index.css';
 
@@ -38,7 +38,10 @@ class App extends React.Component {
         <SearchBar onFormSubmit={this.onTermSubmit} defaultQuery={this.state.defaultQuery} />
         <hr />
         {this.state.videos.length > 0
-          ? <VideoList onVideoSelect={this.onVideoSelect} videos={this.state.videoList} mainVideo={this.state.mainVideo} />
+          ? <div className='screen'>
+              <MainVideo video={this.state.mainVideo} />
+              <VideoList onVideoSelect={this.onVideoSelect} videos={this.state.videoList} />
+            </div>
           : <div>Results are loading ...</div>}
       </div>
     );

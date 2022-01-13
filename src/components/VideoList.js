@@ -1,7 +1,7 @@
 import React from 'react';
-import { VideoItem, MainVideo } from '.';
+import { VideoItem } from '.';
 
-const VideoList = ({ videos, mainVideo, onVideoSelect }) => {
+const VideoList = ({ videos, onVideoSelect }) => {
   const videoMap = videos.map(video => {
     return (
       <VideoItem 
@@ -13,12 +13,9 @@ const VideoList = ({ videos, mainVideo, onVideoSelect }) => {
   })
   
   return (
-    <div className='screen'>
-      <MainVideo video={mainVideo} />
       <div className='video-list'>
         {videoMap}
       </div>
-    </div>
   );
 }
 
